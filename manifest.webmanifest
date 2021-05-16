@@ -1,6 +1,6 @@
 {
-  "name": "StarWars Quotes",
-  "short_name": "Quotes",
+  "name": "Star Wars Quotes",
+  "short_name": "Star Wars Quotes",
   "start_url": ".",
   "icons": [
     {
@@ -17,5 +17,5 @@
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
   "display": "standalone",
-  "description": "The Best quotes of Star War Series"
+  "description": "The Best Star Wars Quotes of All Time"
 }
