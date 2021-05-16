@@ -1,10 +1,17 @@
-const cacheName = "quote-v1";
+const cacheName = "quotes-v2";
 const staticAssets = [
   "./",
   "./index.html",
   "./main.css",
   "./main.js",
+  "./quotes.json",
   "./manifest.webmanifest",
+  "./images/favicon.ico",
+  "./images/favicon-16x16.png",
+  "./images/favicon-32x32.png",
+  "./images/apple-touch-icon.png",
+  "./images/android-chrome-192x192.png",
+  "./images/android-chrome-512x512.png",
 ];
 
 self.addEventListener("install", async () => {
@@ -17,32 +24,16 @@ self.addEventListener("activate", () => {
   self.clients.claim();
 });
 
-self.addEventListener("fetch", async (e) => {
-  const req = e.request;
-  const url = new URL(req.url);
+self.addEventListener("fetch", (e) => {
+  e.respondWith(
+    (async () => {
+      const request = await caches.match(e.request);
+      if (request) return request;
 
-  if (url.origin === location.origin) {
-    e.respondWith(cacheFirst(req));
-  } else {
-    e.respondWith(networkAndCache(req));
-  }
+      const response = await fetch(e.request);
+      const cache = await caches.open(cacheName);
+      cache.put(e.request, response.clone());
+      return response;
+    })()
+  );
 });
-
-const cacheFirst = async (req) => {
-  const cache = await caches.open(cacheName);
-  const cached = await cache.match(req);
-  return cached || fetch(req);
-};
-
-const networkAndCache = async (req) => {
-  const cache = await caches.open(cacheName);
-
-  try {
-    const fresh = await fetch(req);
-    await cache.put(req, fresh.clone());
-    return fresh;
-  } catch (e) {
-    const cached = await cache.match(req);
-    return cached;
-  }
-};

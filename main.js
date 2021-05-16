@@ -34,8 +34,8 @@ const registerSW = async () => {
 };
 
 window.addEventListener("load", () => {
-  readQuotes();
   registerSW();
+  readQuotes();
 });
 
 loadNewQuoteButton.addEventListener("click", readQuotes);
