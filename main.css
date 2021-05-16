@@ -32,6 +32,7 @@ strong {
 }
 
 button {
+  outline: none;
   padding: 0;
   height: 2rem;
   width: 2rem;
@@ -63,5 +64,12 @@ button {
   }
   100% {
     box-shadow: 0 0 0 0 rgba(33, 29, 18, 0);
+  }
+}
+
+@media screen and (max-width: 640px) {
+  button {
+    width: 3.5rem;
+    height: 3.5rem;
   }
 }
