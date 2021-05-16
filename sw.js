@@ -1,4 +1,4 @@
-const cacheName = "quotes-v2";
+const cacheName = "start-wars-quotes";
 const staticAssets = [
   "./",
   "./index.html",
